@@ -6,8 +6,8 @@ const cors= require('cors');
 const path = require('path');
 dotenv.config();
 const userAuthRoutes = require('./routes/userAuth');
-const userRoutes = require('./routes/UserRoute');
-const chatRoutes=require('./routes/ChatRoute');
+const userRoutes = require('./routes/userRoute');
+const chatRoutes=require('./routes/chatRoute');
 const app=express();
 const connectDB = require('../config/db');
 const redisClient = require('../config/redis');
@@ -39,13 +39,13 @@ const InitializeConnection = async()=>{
     try{
         await Promise.all([connectDB(),redisClient.connect()]);
         console.log('Redis connected successfully');
-       //ng the problem router to handle problem-related routes
+     
         app.listen(process.env.PORT, () => {
             console.log(`Server is running on port ${process.env.PORT}`);
     })
     }   
     catch(err){
-        console.error('Redis connection error:', err);
+        console.error('connection error:', err);
     }
 }
 InitializeConnection();

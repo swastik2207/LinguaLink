@@ -1,6 +1,7 @@
 
 const User = require("../models/User");
 const FriendRequest =require('../models/FriendRequest')
+const {sendNotification} = require('../services/notificationService');
 
 const getRecommendedUsers=async(req, res)=> {
     try {
@@ -73,6 +74,12 @@ const sendFriendRequest = async (req, res)=> {
         sender: myId,
         recipient: recipientId,
       });
+
+
+      const receipentUserMailId = recipient.email;
+      await sendNotification(receipentUserMailId, "New Friend Request", `You have received a new friend request from ${req.user.fullname}. Please check your friend requests.`)
+    
+
   
       res.status(201).json(friendRequest);
    }

@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const cors= require('cors');
-
+const {sendNotification} = require('./services/notificationService');
 const path = require('path');
 dotenv.config();
 const userAuthRoutes = require('./routes/userAuth');
@@ -28,6 +28,7 @@ try {
     app.use('/users', userRoutes);
     console.log("Mounting chatRoutes...");
     app.use('/chat', chatRoutes);
+    
     
     // If you have other routes, log them similarly
 } catch (err) {
